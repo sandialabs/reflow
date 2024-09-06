@@ -38,6 +38,7 @@ library
     , directory
     , extra
     , mtl
+    , language-c >=0.9.3
     , precisa
   hs-source-dirs: app
   default-language: Haskell2010
@@ -47,6 +48,7 @@ executable reflow
   other-modules:
       ReFlow
     , Options
+    -- , CParser
     , Common.TypeConversions
     , FramaC.ACSLTypes
     , FramaC.ACSLlang
@@ -67,6 +69,7 @@ executable reflow
     , filepath
     , optparse-applicative
     , mtl
+    , language-c >=0.9.3
     , precisa
     , ReFlow
   hs-source-dirs: app

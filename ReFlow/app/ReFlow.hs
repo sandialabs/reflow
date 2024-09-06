@@ -32,7 +32,9 @@ import Kodiak.Paver (SearchParameters(..))
 import Prelude hiding ((<>))
 import PVSCert (genFpProgFile,genCertFile,genNumCertFile,genExprCertFile,printExprFunCert)
 import Parser.Parser (parseFileToRealProgram,parseFileToSpec)
-import System.FilePath (dropFileName,takeBaseName)
+import System.FilePath (dropFileName,takeBaseName,takeExtension)
+import Language.C
+import Language.C.System.GCC
 import Transformation (transformProgramSymb)
 import TransformationUtils (computeErrorGuards)
 import Translation.Real2Float (real2fpProg)
@@ -40,10 +42,18 @@ import qualified Data.Map as Map
 
 import qualified PRECiSA (computeAllErrorsInKodiakMap)
 
+
 main :: IO ()
 main = do
   options <- parseOptions
-  generateCProg options
+  if (takeExtension . optRealProgramFile) options == ".c"
+    then 
+      do 
+        parsed <- (parseCFile (newGCC "gcc") Nothing [] (optRealProgramFile options))
+        case parsed of
+          Left parseError -> error $ show parseError
+          Right trans -> error $ show trans
+    else generateCProg options
 
 parseRealProg :: FilePath -> IO RProgram
 parseRealProg fileprog = do

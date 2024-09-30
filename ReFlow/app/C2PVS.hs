@@ -32,7 +32,7 @@ import qualified AbsPVSLang as PVS
 -- instance NFData a => NFData (CTypeSpecifier a)
 
 cExprToFAExpr :: CExpression a -> PVS.FAExpr
-cExprToFAExpr (CAssign CAssignOp (CVar id _) cexpr _) = undefined
+cExprToFAExpr (CAssign CAssignOp (CVar id _) cexpr _) =   
 
 
 

@@ -48,7 +48,7 @@ executable reflow
   other-modules:
       ReFlow
     , Options
-    -- , CParser
+    , C2PVS
     , Common.TypeConversions
     , FramaC.ACSLTypes
     , FramaC.ACSLlang

@@ -1,0 +1,3 @@
+package precisa
+  extra-lib-dirs: /Users/shairap/Code/reflow-old/deps/precisa/build/kodiak/
+  ghc-options: -optl=-Wl,-rpath,/Users/shairap/Code/reflow-old/deps/precisa/build/kodiak/

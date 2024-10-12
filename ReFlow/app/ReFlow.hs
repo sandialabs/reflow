@@ -26,7 +26,7 @@ import ErrM (errify)
 import FramaC.PrettyPrint (genFramaCFile, genCFile)
 import FramaC.PrecisaPrelude (precisaPreludeContent)
 import Options (Options(..),parseOptions)
-import PPExt (render,vcat)
+import PPExt (render,vcat,prettyDoc)
 import Kodiak.Runner (KodiakResult(..))
 import Kodiak.Paver (SearchParameters(..))
 import Prelude hiding ((<>))
@@ -35,6 +35,7 @@ import Parser.Parser (parseFileToRealProgram,parseFileToSpec)
 import System.FilePath (dropFileName,takeBaseName,takeExtension)
 import Language.C
 import Language.C.System.GCC
+import C2PVS
 import Transformation (transformProgramSymb)
 import TransformationUtils (computeErrorGuards)
 import Translation.Real2Float (real2fpProg)
@@ -52,7 +53,7 @@ main = do
         parsed <- (parseCFile (newGCC "gcc") Nothing [] (optRealProgramFile options))
         case parsed of
           Left parseError -> error $ show parseError
-          Right trans -> error $ show trans
+          Right trans -> error $ unlines $ map (render . prettyDoc) $ topLevel trans
     else generateCProg options
 
 parseRealProg :: FilePath -> IO RProgram

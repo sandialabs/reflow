@@ -65,7 +65,7 @@ cCompoundBlockItem (CBlockStmt (CReturn (Just cexpr) _)) _ = cExpression cexpr
 
 funDecl :: Show a => CExternalDeclaration a -> PVS.Decl
 funDecl (CFDefExt (CFunDef [(CTypeSpec retTy)] (CDeclr (Just (Ident fid _ _)) cFunDeclrs _ _ _) _ cStmt _)) = 
-  PVS.Decl True funTy fid [] (cStatement cStmt)
+  PVS.Decl True funTy fid (map fst args) (cStatement cStmt)
   where
     funTy = PVS.TypeFun (map snd args) (cTypeSpec retTy)
     x (CFunDeclr (Right (cDecls, _)) _ _) = map argDecl cDecls

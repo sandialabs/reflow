@@ -53,6 +53,7 @@ main = do
         parsed <- (parseCFile (newGCC "gcc") Nothing [] (optRealProgramFile options))
         case parsed of
           Left parseError -> error $ show parseError
+          -- Right trans -> error $ show trans
           Right trans -> error $ unlines $ map (render . prettyDoc) $ topLevel trans
     else generateCProg options
 

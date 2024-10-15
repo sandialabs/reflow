@@ -62,7 +62,7 @@ cExpression env (CConst (CFloatConst (CFloat val) _)) =
   where
 cExpression env (CConst (CIntConst (CInteger val _ _) _)) =
   PVS.FCnst PVS.TInt (toRational val)
-cExpression env (CCast (CDecl [CTypeSpec ty] _ _)(CConst (CFloatConst (CFloat val) _)) _) = 
+cExpression env (CCast (CDecl [CTypeSpec ty] _ _) (CConst (CFloatConst (CFloat val) _)) _) = 
   PVS.FCnst (cTypeSpec ty) (readRational val)
 cExpression _ expr = error $ show expr
 

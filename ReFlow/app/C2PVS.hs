@@ -49,7 +49,7 @@ cTypeSpec _               = undefined
 typeOf :: Show a => Env -> CExpression a -> PVS.PVSType
 typeOf env (CVar (Ident id _ _) _) = envLookup env id
 typeOf env (CBinary binOp e1 e2 _) = typeOf env e1
-typeOf env (CCast (CDecl [CTypeSpec ty] _ _)(CConst (CFloatConst _ _)) _) = cTypeSpec ty
+typeOf env (CCast (CDecl [CTypeSpec ty] _ _) (CConst (CFloatConst _ _)) _) = cTypeSpec ty
 typeOf env (CConst (CFloatConst _ _)) = PVS.FPDouble
 typeOf env expr = error $ show expr
 
